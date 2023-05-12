@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="5.12.css" />
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <canvas id="myChart"></canvas>
+    <div id="box">
+      <h1 id="h1">代办事项</h1>
+      <div id="box_two">
+        <div>
+          <h2>待发货订单</h2>
+          <span>单位（笔）</span>
+          <h2 style="color: purple">4</h2>
+        </div>
+        <div>
+          <h2>待处理售后</h2>
+          <span>单位（笔）</span>
+          <h2 style="color: orange">0</h2>
+        </div>
+        <div>
+          <h2>待付款订单</h2>
+          <span>单位（笔）</span>
+          <h2 style="color: green">133</h2>
+        </div>
+        <div>
+          <h2>待补货商品</h2>
+          <span>单位（笔）</span>
+          <h2 style="color: skyblue">0</h2>
+        </div>
+        <div>
+          <h2>待审核会员</h2>
+          <span>单位（笔）</span>
+          <h2 style="color: yellow">0</h2>
+        </div>
+        <div>
+          <h2>待审核佣金</h2>
+          <span>单位（笔）</span>
+          <h2 style="color: greenyellow">948.19</h2>
+        </div>
+      </div>
+      <div id="box_three">
+        <div class="zong1">
+          <div id="zuo">
+            <div id="zuo1">
+              <h3>新增会员</h3>
+              <div>
+                <button>今天</button>
+                <button class="zuotian">昨天</button>
+                <button>近7日</button>
+                <button>近30日</button>
+              </div>
+            </div>
+            <div id="main" style="width: 500px; height: 400px"></div>
+          </div>
+          <div id="you">
+            <div id="you1">
+              <h3>新增会员</h3>
+              <div>
+                <button>今天</button>
+                <button>昨天</button>
+                <button>近7日</button>
+                <button>近30日</button>
+              </div>
+            </div>
+            <div id="main2" style="width: 500px; height: 400px"></div>
+          </div>
+        </div>
+        <div id="zong2">
+          <div id="zuoa">
+            <div id="zuo2">
+              <h3>运营数据</h3>
+              <div>
+                <button><input type="date" /></button>
+                <button><input type="date" /></button>
+                <button>今天</button>
+                <button>昨天</button>
+                <button>近7日</button>
+                <button>近30日</button>
+              </div>
+            </div>
+            <div id="xiaohou">
+              <div id="zuo3">
+                <div id="box_two2">
+                  <div>
+                    <h2>待发货订单</h2>
+                    <span>单位（笔）</span>
+                    <h2 style="color: purple">4</h2>
+                  </div>
+                  <div>
+                    <h2>待处理售后</h2>
+                    <span>单位（笔）</span>
+                    <h2 style="color: orange">0</h2>
+                  </div>
+                  <div>
+                    <h2>待付款订单</h2>
+                    <span>单位（笔）</span>
+                    <h2 style="color: green">133</h2>
+                  </div>
+                  <div>
+                    <h2>待补货商品</h2>
+                    <span>单位（笔）</span>
+                    <h2 style="color: skyblue">0</h2>
+                  </div>
+                  <div>
+                    <h2>待审核会员</h2>
+                    <span>单位（笔）</span>
+                    <h2 style="color: yellow">0</h2>
+                  </div>
+                  <div>
+                    <h2>待审核佣金</h2>
+                    <span>单位（笔）</span>
+                    <h2 style="color: greenyellow">948.19</h2>
+                  </div>
+                </div>
+              </div>
+              <div id="you3">
+                <div id="main3" style="width: 500px; height: 730px"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script src="./echarts.js"></script>
+    <script>
+      var chartDom = document.getElementById("main");
+      var myChart = echarts.init(chartDom);
+      var xData = [
+        "00:00",
+        "03:00",
+        "06:00",
+        "09:00",
+        "12:00",
+        "15:00",
+        "18:00",
+        "21:00",
+      ];
+      var yData = [[35, 8, 0, 9, 30, 40, 45, 15, 35, 20, 0]];
+      $(".zuotian").on("click", function () {
+        alert(1);
+        yData[0][0] = 60;
+        console.log(yData);
+        // Set new options
+        var options = {
+          xAxis: {
+            data: xData,
+          },
+          yAxis: {
+            type: "value",
+          },
+          series: [
+            {
+              name: "data",
+              type: "line",
+              data: yData[0],
+            },
+          ],
+        };
+        option && myChart.setOption(option);
+        // Re-draw chart with new options
+      });
+      var seriesColor = ["#66CDAA", "#66CDAA"];
+
+      var showArea = true;
+      var showCenterSplit = true;
+      var showMinorYAxis = true;
+
+      var markLineOption = {};
+      var areaOption = {};
+
+      if (showArea) {
+        areaOption = {
+          areaStyle: {
+            color: {
+              type: "linear",
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: seriesColor[0], // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: "#ffffff00", // 100% 处的颜色
+                },
+              ],
+              global: false, // 缺省为 false
+            },
+          },
+        };
+      }
+      if (showCenterSplit) {
+        markLineOption = {
+          markLine: {
+            silent: true,
+            symbol: "none",
+            label: {
+              show: false,
+            },
+            lineStyle: {
+              color: "#eee",
+            },
+            data: [
+              {
+                xAxis: "Thu",
+              },
+            ],
+          },
+        };
+      }
+
+      option = {
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          axisLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            color: "#565656",
+          },
+          data: xData,
+        },
+        yAxis: [
+          {
+            type: "value",
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 10,
+              color: "#929292",
+              height: 0,
+              padding: [-10, 0, 0, -8],
+              inside: true,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "rgba(238,238,238,0.50)",
+              },
+            },
+          },
+          {
+            show: showMinorYAxis,
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 10,
+              color: "#929292",
+              height: 0,
+              padding: [-10, 0, 0, -8],
+              inside: true,
+            },
+          },
+        ],
+        tooltip: {
+          show: true,
+          trigger: "axis",
+          showContent: false,
+          axisPointer: {
+            lineStyle: {
+              color: "rgba(86,86,86,0.50)",
+            },
+          },
+        },
+        series: yData.map((item, i) => {
+          return {
+            yAxisIndex: i,
+            data: yData[0],
+            type: "line",
+            symbol: "circle",
+            hoverAnimation: false,
+            itemStyle: {
+              color: "#000",
+            },
+            showSymbol: false,
+            lineStyle: {
+              color: seriesColor[i],
+            },
+            ...markLineOption,
+            ...areaOption,
+          };
+        }),
+      };
+
+      option && myChart.setOption(option);
+
+      //二
+      var chartDom = document.getElementById("main2");
+      var myChart = echarts.init(chartDom);
+      var xData = [
+        "00:00",
+        "03:00",
+        "06:00",
+        "09:00",
+        "12:00",
+        "15:00",
+        "18:00",
+        "21:00",
+      ];
+      var yData = [[0, 0, 1, 0, 3, 0, 0, 0]];
+      var seriesColor = ["#66CDAA", "#66CDAA"];
+
+      var showArea = true;
+      var showCenterSplit = true;
+      var showMinorYAxis = true;
+
+      var markLineOption = {};
+      var areaOption = {};
+      if (showArea) {
+        areaOption = {
+          areaStyle: {
+            color: {
+              type: "linear",
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: seriesColor[0], // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: "#ffffff00", // 100% 处的颜色
+                },
+              ],
+              global: false, // 缺省为 false
+            },
+          },
+        };
+      }
+      if (showCenterSplit) {
+        markLineOption = {
+          markLine: {
+            silent: true,
+            symbol: "none",
+            label: {
+              show: false,
+            },
+            lineStyle: {
+              color: "#eee",
+            },
+            data: [
+              {
+                xAxis: "Thu",
+              },
+            ],
+          },
+        };
+      }
+
+      option = {
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          axisLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            color: "#565656",
+          },
+          data: xData,
+        },
+        yAxis: [
+          {
+            type: "value",
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 10,
+              color: "#929292",
+              height: 0,
+              padding: [-10, 0, 0, -8],
+              inside: true,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "rgba(238,238,238,0.50)",
+              },
+            },
+          },
+          {
+            show: showMinorYAxis,
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 10,
+              color: "#929292",
+              height: 0,
+              padding: [-10, 0, 0, -8],
+              inside: true,
+            },
+          },
+        ],
+        tooltip: {
+          show: true,
+          trigger: "axis",
+          showContent: false,
+          axisPointer: {
+            lineStyle: {
+              color: "rgba(86,86,86,0.50)",
+            },
+          },
+        },
+        series: yData.map((item, i) => {
+          return {
+            yAxisIndex: i,
+            data: item,
+            type: "bar",
+            symbol: "circle",
+            hoverAnimation: false,
+            itemStyle: {
+              width: "10", //怎么调
+              color: "#66CDAA",
+            },
+            showSymbol: false,
+            lineStyle: {
+              color: seriesColor[i],
+            },
+            ...markLineOption,
+            ...areaOption,
+          };
+        }),
+      };
+      option && myChart.setOption(option);
+      //三
+      var chartDom = document.getElementById("main3");
+      var myChart = echarts.init(chartDom);
+      var xData = [
+        "00:00",
+        "03:00",
+        "06:00",
+        "09:00",
+        "12:00",
+        "15:00",
+        "18:00",
+        "21:00",
+      ];
+      var yData = [[0, 0, 150, 0, 650, 0, 0, 0]];
+      var seriesColor = ["#66CDAA", "#66CDAA"];
+
+      var showArea = true;
+      var showCenterSplit = true;
+      var showMinorYAxis = true;
+
+      var markLineOption = {};
+      var areaOption = {};
+      if (showArea) {
+        areaOption = {
+          areaStyle: {
+            color: {
+              type: "linear",
+              x: 0,
+              y: 0,
+              x2: 0,
+              y2: 1,
+              colorStops: [
+                {
+                  offset: 0,
+                  color: seriesColor[0], // 0% 处的颜色
+                },
+                {
+                  offset: 1,
+                  color: "#ffffff00", // 100% 处的颜色
+                },
+              ],
+              global: false, // 缺省为 false
+            },
+          },
+        };
+      }
+      if (showCenterSplit) {
+        markLineOption = {
+          markLine: {
+            silent: true,
+            symbol: "none",
+            label: {
+              show: false,
+            },
+            lineStyle: {
+              color: "#eee",
+            },
+            data: [
+              {
+                xAxis: "Thu",
+              },
+            ],
+          },
+        };
+      }
+
+      option = {
+        xAxis: {
+          type: "category",
+          boundaryGap: false,
+          axisLine: {
+            show: false,
+          },
+          axisTick: {
+            show: false,
+          },
+          axisLabel: {
+            color: "#565656",
+          },
+          data: xData,
+        },
+        yAxis: [
+          {
+            type: "value",
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 10,
+              color: "#929292",
+              height: 0,
+              padding: [-10, 0, 0, -8],
+              inside: true,
+            },
+            splitLine: {
+              lineStyle: {
+                color: "rgba(238,238,238,0.50)",
+              },
+            },
+          },
+          {
+            show: showMinorYAxis,
+            axisLine: {
+              show: false,
+            },
+            axisTick: {
+              show: false,
+            },
+            splitLine: {
+              show: false,
+            },
+            axisLabel: {
+              fontSize: 10,
+              color: "#929292",
+              height: 0,
+              padding: [-10, 0, 0, -8],
+              inside: true,
+            },
+          },
+        ],
+        tooltip: {
+          show: true,
+          trigger: "axis",
+          showContent: false,
+          axisPointer: {
+            lineStyle: {
+              color: "rgba(86,86,86,0.50)",
+            },
+          },
+        },
+        series: yData.map((item, i) => {
+          return {
+            yAxisIndex: i,
+            data: item,
+            type: "line",
+            symbol: "circle",
+            hoverAnimation: false,
+            itemStyle: {
+              width: "10", //怎么调
+              color: "#66CDAA",
+            },
+            showSymbol: false,
+            lineStyle: {
+              color: seriesColor[i],
+            },
+            ...markLineOption,
+            ...areaOption,
+          };
+        }),
+      };
+      option && myChart.setOption(option);
+    </script>
+  </body>
+</html>
